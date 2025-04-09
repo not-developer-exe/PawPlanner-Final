@@ -87,4 +87,160 @@ const registerUser = async (req, res) => {
     }
 };
 
-export { loginUser, registerUser };
+const getProfile = async (req, res) => {
+    try {
+        const userId = req.body.userId;
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
+        res.status(200).json({
+            success: true,
+            user
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const updateProfile = async (req, res) => {
+    try {
+        const userId = req.body.userId;
+        const updates = req.body;
+        const user = await userModel.findByIdAndUpdate(userId, updates, { new: true });
+        res.status(200).json({
+            success: true,
+            user
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const bookAppointment = async (req, res) => {
+    try {
+        // Implementation for booking appointment
+        res.status(200).json({
+            success: true,
+            message: 'Appointment booked successfully'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const listAppointment = async (req, res) => {
+    try {
+        // Implementation for listing appointments
+        res.status(200).json({
+            success: true,
+            appointments: []
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const cancelAppointment = async (req, res) => {
+    try {
+        // Implementation for canceling appointment
+        res.status(200).json({
+            success: true,
+            message: 'Appointment cancelled successfully'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const paymentRazorpay = async (req, res) => {
+    try {
+        // Implementation for Razorpay payment
+        res.status(200).json({
+            success: true,
+            message: 'Payment initiated'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const verifyRazorpay = async (req, res) => {
+    try {
+        // Implementation for verifying Razorpay payment
+        res.status(200).json({
+            success: true,
+            message: 'Payment verified'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const paymentStripe = async (req, res) => {
+    try {
+        // Implementation for Stripe payment
+        res.status(200).json({
+            success: true,
+            message: 'Payment initiated'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const verifyStripe = async (req, res) => {
+    try {
+        // Implementation for verifying Stripe payment
+        res.status(200).json({
+            success: true,
+            message: 'Payment verified'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+export {
+    loginUser,
+    registerUser,
+    getProfile,
+    updateProfile,
+    bookAppointment,
+    listAppointment,
+    cancelAppointment,
+    paymentRazorpay,
+    verifyRazorpay,
+    paymentStripe,
+    verifyStripe
+};
